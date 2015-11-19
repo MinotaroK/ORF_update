@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="Tekkenapp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="linq.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-controller="ViewController">
+	<div ng-if="mode == 'start'" class="bigin">
+		<img src="start_img/tekken_logo.jpg" width="100%">
+	<div class="button_area">
+		<a class="button" ng-click="start()" href="#">Start</a>
+	</div>
+	</div>
+	<div ng-if="mode == 'battle'">
+		<div class="question">
+			<p>技を受けた後のプレイヤーの行動はどのレベル？</p>
+		</div>
+		<div class="gif_area" ng-model="data">
+			<img src="{{data.name}}" width="50%">
+		</div>
+		<br/>
+		<div class="radio_area">
+			<input type="radio" name="player" value="初級者" id="bigin"><label for="bigin">初級者</label>
+			<input type="radio" name="player" value="中級者" id="middle"><label for="middle">中級者</label>
+			<input type="radio" name="player" value="上級者" id="pro"><label for="pro">上級者</label>
+		</div>
+		<br/>
+		<div class="button_area">
+			<a class="button" ng-click="deside()" href="#">次の問題へ</a>
+		</div>
+	</div>
+	<div ng-if="mode == 'result'">
+			<div class="result_area">
+				<div class="resultTitle">
+					結果発表<br/>
+				</div>
+				<br/>
+				<div class="selected_area">
+					<div class="level_image" ng-model="resultImg">
+						<img src="{{resultImg}}">
+					</div>
+					<div class="level" ng-model="level">
+						あなたは{{level}}です！
+					</div>
+					<table class="table_area">
+						<thead>
+						<tr><th>Question　　　</th><th>Your Choice　　　</th><th>Result　　　</th><th>True Answer</th></tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="d in answer_list">
+								<td>{{d.number}}</td>
+								<td>{{d.selected}}</td>
+								<td>{{d.answer}}</td>
+								<td>{{d.true}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<div class="btn center-block" ng-click="back()"><p>Back</p></div>
+				</div>
+			</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="layarApp">
+<head>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="js/av_img.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/linq.min.js"></script>
+	<script type="text/javascript" src="js/av_word.js"></script>
+	<script type="text/javascript" src="js/word_title.js"></script>
+	<script type="text/javascript" src="js/makeTitle.js"></script>
+	<script type="text/javascript" src="js/av_define.js"></script>
+	<script type="text/javascript" src="js/av_structure.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body ng-controller="MainController">
+	<div class="layar1" ng-if="layarPage == '1'">
+		<div class="layarName" ng-repeat="d in layarImage1|limitTo: 1">
+			レイヤー0
+		</div>
+		<div class="baseButtonArea">
+			<input type="button" class="imgButton" value="画像" ng-click="backImg1()" ng-if="definePage==false">
+			<input type="button" class="wordButton" value="文字" ng-click="wordfirstClick()" ng-if="definePage==false">
+			<input type="button" class="strucButton" value="構造" ng-click="structurefirstClick()" ng-if="definePage==false">
+			<input type="button" class="definebackButton" value="構造群に戻る" ng-click="defineBack()" ng-if="definePage!=false">
+			<input type="button" class="defineButton" value="説明" ng-click="defineClickA()" ng-if="definePage==false">
+			<input type="button" class="defineButtonA" value="大枠A" ng-click="defineClickA()" ng-if="definePage!=false">
+			<input type="button" class="defineButtonB" value="中枠B" ng-click="defineClickB()" ng-if="definePage!=false">
+			<input type="button" class="defineButtonC" value="小枠C" ng-click="defineClickC()" ng-if="definePage!=false">
+		</div>
+		<div class="imgarea">
+			<div class="imgbox" ng-repeat="d in layarImage1">
+				<img src="{{d.img}}" ng-click="firstClick(d)" />
+			</div>
+		</div>
+	</div>
+	<div class="layar2" ng-if="layarPage == '2'">
+		<div class="layarName" ng-repeat="d in layarImage2|limitTo: 1">
+			レイヤー{{d.type}}
+		</div>
+		<div class="baseButtonArea">
+			<input type="button" class="imgButton" value="画像" ng-click="backImage2()">
+			<input type="button" class="wordButton" value="文字" ng-click="wordsecondClick()">
+			<input type="button" class="strucButton" value="構造" ng-click="structuresecondClick()">
+		</div>
+		<div class="customButtonArea">
+			<input type="button" class="back" value="戻る" ng-click="backtoLayar0()">
+		</div>
+		<div class="imgarea">
+			<div class="imgbox" ng-repeat="d in layarImage2">
+				<img src="{{d.img}}" ng-click="secondClick(d)" />
+			</div>
+		</div>
+	</div>
+	<div class="layar3" ng-if="layarPage == '3'">
+		<div class="layarName" ng-repeat="d in layarImage3|limitTo: 1">
+			レイヤー{{d.layar}}
+		</div>
+		<div class="autoTitle" ng-model="autoTitle" ng-class="{'blue':clusterType=='1', 'purple':clusterType=='2', 'pink':clusterType=='4'}">
+			{{autoTitle}}
+		</div>
+		<div class="baseButtonArea">
+			<input type="button" class="changeTitle" value="タイトル変更" ng-click="remakeTitle()">
+			<input type="button" class="imgButton" value="画像" ng-click="backImage3()">
+			<input type="button" class="wordButton" value="文字" ng-click="wordthirdClick()">
+			<input type="button" class="strucButton" value="構造" ng-click="structurethirdClick()">
+		</div>
+		<div class ="customButtonArea">
+			<input type="button" class="back" value="戻る" ng-click="backtoLayar1()">
+		</div>
+		<div class="imgarea">
+			<div class="imgbox3" ng-repeat="d in layarImage3">
+				<img src="{{d.img}}"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
